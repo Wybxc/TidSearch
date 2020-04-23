@@ -59,3 +59,8 @@ const sch = new TidSearch({
 
 ## 配置项
 关于 `TidSearch` 对象在初始化时的其他参数，以及具体用法，请参阅 [Wiki 页面](https://github.com/Wybxc/TidSearch/wiki/%E9%85%8D%E7%BD%AE%E9%A1%B9)。
+
+## 开源许可证
+本项目使用 MPLv2 开源许可证，您需要注意以下几点：
+- 您需要公布您对本项目源码修改部分的代码。
+- 您需要对修改之处提供说明文档。
