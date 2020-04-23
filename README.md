@@ -58,4 +58,4 @@ const sch = new TidSearch({
 `TidSearch` 在编写时使用了大量ES6甚至ES2015的语法，而且**依赖于 `Promise` 特性**。尽管您可以通过 `babel` 等工具来使其兼容ES5的语法，但是为了使其能在较旧的浏览器上运行，您还需要引入 `Promise` 的 `polyfill`，具体方法请参阅相关文章。
 
 ## 配置项
-关于 `TidSearch` 对象在初始化时的其他参数，以及具体用法，请参阅 Wiki 页面（等待创建）。
+关于 `TidSearch` 对象在初始化时的其他参数，以及具体用法，请参阅 [Wiki 页面](https://github.com/Wybxc/TidSearch/wiki/%E9%85%8D%E7%BD%AE%E9%A1%B9)。
