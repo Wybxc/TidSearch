@@ -4,7 +4,8 @@
   "description": "为静态博客添加搜索功能的 JavaScript 库。",
   "browser": "dist/TidSearch.js",
   "scripts": {
-    "build": "npx babel src --out-dir dist"
+    "build": "npx babel src --out-dir dist",
+    "test": "echo \"There is no test. Make myself happy :D \""
   },
   "files": [
     "dist",
