@@ -45,7 +45,7 @@ Note that the content item in the above template does not contain quota marks, w
 
 If you do not need an item in the template, just delete the corresponding line.
 
-##  Add DOM elements to the page
+### Add DOM elements to the page
 For TidSearch, you need to add a `<div>` or a `<ul>` or other DOM element to the page to hold the search results.
 
 Alternatively, you can add an input to support instant search. 
