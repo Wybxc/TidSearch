@@ -1,5 +1,8 @@
 # TidSearch
 [![Build Status](https://api.travis-ci.com/Wybxc/TidSearch.svg?branch=master)](https://travis-ci.com/github/Wybxc/TidSearch)
+[![Dev Dependences](https://david-dm.org/Wybxc/TidSearch/dev-status.svg)](https://david-dm.org/Wybxc/TidSearch?type=dev)
+[![Version](https://img.shields.io/npm/v/tidsearch)](https://www.npmjs.com/package/tidsearch)
+[![Licence](https://img.shields.io/npm/l/tidsearch)](https://github.com/Wybxc/TidSearch/blob/master/LICENSE)
 
 为静态博客添加搜索功能的 JavaScript 库。
 
