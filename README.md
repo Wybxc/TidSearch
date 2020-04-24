@@ -1,4 +1,5 @@
 # TidSearch
+[![Build Status](https://api.travis-ci.com/Wybxc/TidSearch.svg?branch=master)](https://travis-ci.com/github/Wybxc/TidSearch)
 为静态博客添加搜索功能的 JavaScript 库。
 Click [here](https://github.com/Wybxc/TidSearch/blob/master/README_en.md) for English version.
 
