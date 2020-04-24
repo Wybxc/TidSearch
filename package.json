@@ -1,6 +1,6 @@
 {
   "name": "tidsearch",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "为静态博客添加搜索功能的 JavaScript 库。",
   "browser": "dist/TidSearch.min.js",
   "scripts": {
