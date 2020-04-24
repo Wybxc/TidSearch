@@ -1,0 +1,44 @@
+{
+  "name": "tidsearch",
+  "version": "1.0.0",
+  "description": "为静态博客添加搜索功能的 JavaScript 库。",
+  "scripts": {
+    "babel": "npx babel src --out-dir dest",
+    "minify": "npx uglifyjs ./dest/TidSearch.js -o ./dest/TidSearch.min.js -c -m",
+    "build": "npm run babel && npm run minify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wybxc/TidSearch.git"
+  },
+  "keywords": [
+    "jekyll-search",
+    "blog"
+  ],
+  "author": "忘忧北萱草",
+  "license": "MPLv2",
+  "bugs": {
+    "url": "https://github.com/Wybxc/TidSearch/issues"
+  },
+  "homepage": "https://github.com/Wybxc/TidSearch",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.9.5",
+    "uglify-js": "^3.9.1"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "chrome": "59",
+            "ie": "11"
+          }
+        }
+      ]
+    ],
+    "plugins": []
+  }
+}

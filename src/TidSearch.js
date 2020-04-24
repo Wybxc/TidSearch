@@ -13,7 +13,9 @@
 
     function ajaxGetJSON(url) {
         return new Promise(function (resolve, reject) {
-            const xhr = new XMLHttpRequest();
+            const xhr = global.XMLHttpRequest ?
+                new global.XMLHttpRequest() :
+                new gloabl.ActiveXObject('Microsoft.XMLHTTP');
             xhr.open('GET', url, true);
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4) {
@@ -48,8 +50,8 @@
 
     function defaultSegmenter(str) {
         str = str.trim()
-        if (str.length == 0) return Promise.resolve([]); 
-        if (str.length == 1) return Promise.resolve([str]); 
+        if (str.length == 0) return Promise.resolve([]);
+        if (str.length == 1) return Promise.resolve([str]);
         const url = `//bird.ioliu.cn/v1?url=http://api.pullword.com/get.php&source=${encodeURI(str)}&param1=0&param2=0&json=1`
         return ajaxGetJSON(url).then(json => json.map(word => word.t));
     }
@@ -132,9 +134,9 @@
                 }
                 return pages;
             }).then(result => {
-                if(this.afterSearch) this.afterSearch(result);
+                if (this.afterSearch) this.afterSearch(result);
                 return result;
-            });            
+            });
         }
     }
 
