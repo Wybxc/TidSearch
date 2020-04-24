@@ -1,5 +1,6 @@
 # TidSearch
 为静态博客添加搜索功能的 JavaScript 库。
+Click [here](https://github.com/Wybxc/TidSearch/blob/master/README_en.md) for English version.
 
 ## 安装
 ### 下载源代码
@@ -46,16 +47,19 @@ layout: null
 ### 在页面上添加所需的 DOM 元素
 使用 `TidSearch` 需要在页面中添加一个`<div>`或者`<ul>`等 DOM 元素来容纳搜索结果。
 ```html
+<input id="searchInput"/>
 <div id="searchResultContainer"></div>
 ```
-另外，您还可以添加一个`<input>`，以支持即时搜索。**（当前版本尚不支持。）**
+另外，您还可以添加一个`<input>`，以支持即时搜索。
 
 ### 初始化 `TidSearch` 组件
-使用如下的 `JavaScript` 代码来初始化 `TidSearch`。
+使用如下的 JavaScript 代码来初始化 `TidSearch`。
 ```javascript
 const sch = new TidSearch({
+    input: document.getElementById('searchInput'),
     output: document.getElementById('searchResultContainer'),
     // 或者这样写
+    // input: '#searchInput',
     // output: '#searchResultContainer',
     json: '/search.json',
 });
@@ -67,11 +71,13 @@ const sch = new TidSearch({
 ### 开始使用
 在 `TidSearch` 对象初始化完成之后，您可以通过其 `search` 方法发起一次搜索。搜索的结果会呈现在预先准备的容器元素中。
 
+如果您在初始化时指定了 `input` 项，那么当其值变化时，会自动触发 `search` 方法。
+
 ## 关于浏览器兼容性
 **`TidSearch` 依赖于 `Promise`**。默认的配置文件使用了`babel`来兼容旧版浏览器（Chrome59 和 IE11），但是**没有**包含对于 `Promise` 的 polyfill，如果您需要兼容不支持 `Promise` 的浏览器，请自行引入 polyfill。具体方法请参阅相关文章。
 
 ## 配置项
-关于 `TidSearch` 对象在初始化时的其他参数，以及具体用法，请参阅 [Wiki 页面](https://github.com/Wybxc/TidSearch/wiki/%E9%85%8D%E7%BD%AE%E9%A1%B9)。
+关于 `TidSearch` 对象在初始化时的其他参数，以及具体用法，请参阅 [Wiki 页面](https://github.com/Wybxc/TidSearch/wiki/)。
 
 ## 开源许可证
 本项目使用 MPLv2 开源许可证，您需要注意以下几点：
