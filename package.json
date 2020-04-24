@@ -2,14 +2,13 @@
   "name": "tidsearch",
   "version": "1.0.5",
   "description": "为静态博客添加搜索功能的 JavaScript 库。",
-  "browser": "dist/TidSearch.min.js",
+  "browser": "dist/TidSearch.js",
   "scripts": {
-    "babel": "npx babel src --out-dir dist",
-    "minify": "npx uglifyjs ./dest/TidSearch.js -o ./dest/TidSearch.min.js -c -m",
-    "build": "npm run babel && npm run minify"
+    "build": "npx babel src --out-dir dist"
   },
   "files": [
     "dist",
+    "src",
     "*"
   ],
   "repository": {
@@ -29,8 +28,7 @@
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.9.5",
-    "uglify-js": "^3.9.1"
+    "@babel/preset-env": "^7.9.5"
   },
   "babel": {
     "presets": [

@@ -2,7 +2,20 @@
 为静态博客添加搜索功能的 JavaScript 库。
 
 ## 安装
-目前**仅可通过下载源码的形式**安装。克隆这个 git 仓库，并将 `TidSearch.js` 复制到您的网站目录下，然后通过`<script>`标签将其引入。
+### 下载源代码
+克隆这个 git 仓库，并使用如下命令生成 `dist` 目录。
+
+```sh
+npm install
+npm run build
+```
+然后将 `dist` 目录中的 `TidSearch.js` 复制到您的网站目录下，即可通过`<script>`标签将其引入。
+
+### 使用 CDN
+您可以使用 `jsdelivr` 提供的 CDN 在网页上引入本项目。
+```html
+<script src="https://cdn.jsdelivr.net/npm/tidsearch@latest/dist/TidSearch.min.js"></script>
+```
 
 ## 快速入门
 ### 创建 `search.json`
@@ -55,7 +68,7 @@ const sch = new TidSearch({
 在 `TidSearch` 对象初始化完成之后，您可以通过其 `search` 方法发起一次搜索。搜索的结果会呈现在预先准备的容器元素中。
 
 ## 关于浏览器兼容性
-`TidSearch` 在编写时使用了大量ES6甚至ES2015的语法，而且**依赖于 `Promise` 特性**。尽管您可以通过 `babel` 等工具来使其兼容ES5的语法，但是为了使其能在较旧的浏览器上运行，您还需要引入 `Promise` 的 `polyfill`，具体方法请参阅相关文章。
+**`TidSearch` 依赖于 `Promise`**。默认的配置文件使用了`babel`来兼容旧版浏览器（Chrome59 和 IE11），但是**没有**包含对于 `Promise` 的 polyfill，如果您需要兼容不支持 `Promise` 的浏览器，请自行引入 polyfill。具体方法请参阅相关文章。
 
 ## 配置项
 关于 `TidSearch` 对象在初始化时的其他参数，以及具体用法，请参阅 [Wiki 页面](https://github.com/Wybxc/TidSearch/wiki/%E9%85%8D%E7%BD%AE%E9%A1%B9)。
