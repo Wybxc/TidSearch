@@ -23,7 +23,7 @@ You can use CDN provided by jsdelivr to introduce the project to your web pages.
 Add a `search.json` to your web site, the contents of which are an array, and each element in the array is an object containing information about a page, which needs to contain fields including `title`, `url`, `category` (optional) , `tags` (optional) , `date` (optional) , `content` (optional).
 
 For blogs built with Jekyll, you can use the following template to quickly generate `search.json`.
-```json
+```
 ---
 layout: 
 ---
