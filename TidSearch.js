@@ -19,6 +19,7 @@
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200 || xhr.status == 304) {
                         const jsonObj = JSON.parse(xhr.responseText);
+                        console.log(jsonObj);
                         resolve(jsonObj);
                     } else {
                         reject('HTTP ' + xhr.status + ' error!');
@@ -36,13 +37,21 @@
             return ajaxGetJSON(json);
     }
 
-    function format(template, obj) {
+    function format(template, obj, middleware) {
         if (!template.replace) throw "Argument must be string!";
-        return template.replace(/\{\w+?\}/g, match => obj[match.slice(1, -1)]);
+        return template.replace(/\{\w+?\}/g, match => middleware(obj, match.slice(1, -1)));
+    }
+
+    function defaultTemplateMiddleware(obj, field) {
+        return obj[field];
     }
 
     function defaultSegmenter(str) {
-        return Promise.resolve(str.split(' '));
+        str = str.trim()
+        if (str.length == 0) return Promise.resolve([]); 
+        if (str.length == 1) return Promise.resolve([str]); 
+        const url = `//bird.ioliu.cn/v1?url=http://api.pullword.com/get.php&source=${encodeURI(str)}&param1=0&param2=0&json=1`
+        return ajaxGetJSON(url).then(json => json.map(word => word.t));
     }
 
     function defaultMatch(keywords, page) {
@@ -67,17 +76,30 @@
         constructor(config) {
             this.input = config.input ? getDOMElement(config.input) : null;
             this.output = getDOMElement(config.output);
-            this.jsonPromise = loadJSON(config.json);
             this.json = null;
             this.template = config.template || '<p><a href="{url}">{title}</a></p>';
+            this.templateMiddleware = config.templateMiddleware || defaultTemplateMiddleware;
+            this.noResult = config.noResult || 'No Result.';
             this.segmenter = config.segmenter || defaultSegmenter;
             this.match = config.match || defaultMatch;
             this.paginator = config.paginator;
+            this.afterSearch = config.afterSearch;
 
-            this.loaded = this.jsonPromise.then(result => {
+            this.loaded = loadJSON(config.json).then(result => {
                 this.json = result;
             }, reason => {
                 throw "Load JSON fail! " + reason;
+            }).then(() => {
+                let register = null;
+                if (!this.input.addEventListener)
+                    if (this.input.attachEvent)
+                        register = func => this.input.attachEvent('onpropertychange', func);
+                    else throw "Your Browser is too old!";
+                register = func => {
+                    this.input.addEventListener('input', func);
+                    this.input.addEventListener('paste', func);
+                };
+                register(() => this.search(this.input.value));
             });
         }
 
@@ -87,23 +109,32 @@
                 console.warn(errMsg);
                 return Promise.reject(errMsg);
             }
-            return this.segmenter(str).then(keywords =>
-                this.json.map(page => ({
+            return this.segmenter(str).then(keywords => {
+                if (!keywords.length) {
+                    this.output.innerHTML = '';
+                    return [];
+                }
+                let pages = this.json.map(page => ({
                     score: this.match(keywords, page),
                     page: page,
-                })).filter(a => a.score > 0)
-                    .sort((a, b) => b.score - a.score)
-                    .map(a => a.page)
-            ).then(pages => {
-                const pageElements = pages.map(page => format(this.template, page));
-                if (this.paginator) {
-                    throw "Unimplemented";
-                    this.paginator(pageElements).map(pages => pages.join('\n'));
-                } else {
-                    this.output.innerHTML = pageElements.join('\n');
+                })).filter(a => a.score > 0);
+                pages = pages.sort((a, b) => b.score - a.score).map(a => a.page);
+                if (!pages.length)
+                    this.output.innerHTML = this.noResult;
+                else {
+                    const pageElements = pages.map(page => format(this.template, page, this.templateMiddleware));
+                    if (this.paginator) {
+                        throw "Unimplemented";
+                        this.paginator(pageElements).map(pages => pages.join('\n'));
+                    } else {
+                        this.output.innerHTML = pageElements.join('\n');
+                    }
                 }
                 return pages;
-            });
+            }).then(result => {
+                if(this.afterSearch) this.afterSearch(result);
+                return result;
+            });            
         }
     }
 
